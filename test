@@ -1,0 +1,14 @@
+#!/bin/bash
+if ! [ -d "./.temp/" ]; then
+    mkdir ./.temp
+fi
+#$(pkg-config gtkmm-2.4 --cflags)
+clear
+g++ test.cpp -lglfw -lGL -lGLEW -lGLU -g -o .temp/test -lm
+
+size=$(find "./.temp/test" -printf "%s")
+echo "Compiled test file size ($((size/1000)) Kb)".
+
+sleep 1
+
+./.temp/test

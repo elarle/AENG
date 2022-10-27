@@ -1,0 +1,9 @@
+Starting Engine. Local time Thu Oct 27 13:26:37 2022
+Build version: Oct 27 2022 13:26:35
+
+[INFO] Creating frame
+[INFO] Set antialias to: 16
+[INFO] System Info: 
+  Renderer: AMD Radeon RX 580 Series (polaris10, LLVM 14.0.6, DRM 3.48, 6.0.2-arch1-1) 
+  Version: 4.6 (Core Profile) Mesa 22.2.1
+[INFO] Window created succesfully
