@@ -1,3 +1,3 @@
 # Acorn Engine
 
-This is a experimetal 3D engine. 
+This is a C++ experimetal 3D engine. 
