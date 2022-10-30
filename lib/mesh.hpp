@@ -1,11 +1,15 @@
 #ifndef AENG_MESH_H
 #define AENG_MESH_H
 
+#include <cstdio>
+#include <cstdlib>
 #include <iostream>
 #include <ostream>
 #include <sstream>
 #include <string.h>
+#include <string>
 #include <vector>
+#include "console.hpp"
 
 inline std::vector<std::string> split (const std::string &s, char delim) {
     std::vector<std::string> result;
@@ -35,16 +39,18 @@ inline std::vector<int> parse_faces(const char *line){
     std::string s = line;
         int len = strlen(line);
         std::vector<std::string> v = split(s, ' ');
-        for(int i = 1; i < v.size(); i++){
-            //floats.push_back((int)atof(v[i].c_str()));
+        for(int i = 1; i < (int)v.size(); i++){
+            
+                //floats.push_back((int)atof(v[i].c_str()));
+
             std::vector<std::string> vcs = split(v[i], '/');
-            std::cout << v.size();
-            for(int e = 0; e < vcs.size(); i++){
-                std::cout << "Off size :)" << std::endl;
-                floats.push_back((int)atof(vcs[i].c_str()));
-                std::cout << "Off size3 :)" << std::endl;
+
+            for(int e = 0; e < vcs.size(); e+=3){
+                const char *line_var = vcs[e].c_str();
+                int value = (int)((float)atof(line_var));
+                //printf("VAR: %s -> %i | ", line_var, value);
+                floats.push_back(value);
             }
-            std::cout << "NEXT :)" << std::endl;
         }
     return floats;
 }
