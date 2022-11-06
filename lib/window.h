@@ -1,9 +1,12 @@
 #ifndef AENG_WINDOW
 #define AENG_WINDOW
 
+#include "console.hpp"
+#include "math.cpp"
 #include "reader.h"
 #include "util.h"
 #include <GL/eglew.h>
+#include <GL/gl.h>
 #include <GLFW/glfw3.h>
 #include <cstddef>
 #include <iostream>
@@ -24,6 +27,7 @@ inline void resized(GLFWwindow* window, int width, int height){
     //width = swidth;
     //height = sheight;
     //glfwGetFramebufferSize(window, &width, &height);
+
     glViewport(0, 0, width, height);
 
     std::cout << width << " - " << height << std::endl;
@@ -74,15 +78,16 @@ inline int AENGDeleteWindow(){
 inline int AENGClose(){
     return glfwWindowShouldClose(window);
 }
-inline void AENGUpdate(void (*update)(), GLuint *shader, GLuint *VAO, int count){
+inline void AENGUpdate(void (*update)(), GLuint *shader, int count, int m_i, mat4 model_c){
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glUseProgram(*shader);
-    glBindVertexArray(*VAO);
-
-    glDrawArrays(GL_TRIANGLES,0, count);
+    for(int i = 0; i < 1; i++){
+        glUniformMatrix4fv(m_i, 1, GL_FALSE, model_c.m);
+        glDrawArrays(GL_TRIANGLES,0, count);
+    }
 
     (*update)();
 
@@ -91,27 +96,6 @@ inline void AENGUpdate(void (*update)(), GLuint *shader, GLuint *VAO, int count)
 }
 
 //-----SHADER FUNCTIONS-----//
-GLuint createVS();
-inline GLuint createVS(){
-    const char* p;
-    char VS[MAX_SHADER_SIZE];
-    readfile("./shaders/VS.glsl", VS);
-    GLuint vs = glCreateShader(GL_VERTEX_SHADER);
-    p = (const GLchar*)VS;
-    glShaderSource(vs, 1, &p, NULL);
-    glCompileShader(vs);
-    return vs;
-}
-GLuint createFS();
-inline GLuint createFS(){
-    const char* p;
-    char FS[MAX_SHADER_SIZE];
-    readfile("./shaders/FS.glsl", FS);
-    GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
-    p = (const GLchar*)FS;
-    glShaderSource(fs, 1, &p, NULL);
-    glCompileShader(fs);
-    return fs;
-}
+
 
 #endif

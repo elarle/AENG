@@ -1,0 +1,24 @@
+Starting Engine. Local time Sun Nov  6 14:17:43 2022
+Build version: Nov  6 2022 14:17:41
+
+[INFO] Loaded mesh with size: 720
+[INFO] Pushing points(720) to mesh(720)
+[INFO] Push process completed
+[INFO] Pushing colors(240) for faces(240)
+[INFO] Model loaded, (240) -> 2880 bytes
+[INFO] Creating frame
+[INFO] Set antialias to: 16
+[INFO] System Info: 
+  Renderer: AMD Radeon RX 580 Series (polaris10, LLVM 14.0.6, DRM 3.48, 6.0.2-arch1-1) 
+  Version: 4.6 (Core Profile) Mesa 22.2.1
+[INFO] Window created succesfully
+[INFO] Loaded Vertex Shader
+[INFO] Loaded Fragment Shader
+[INFO] Created Point vertex buffer object
+[INFO] Created Color vertex buffer object
+[INFO] Generated Vertex Buffers
+[INFO] Generated VAO
+[INFO] Creating camera parameters
+[INFO] Enabled custom settings
+[INFO] Starting main thread
+[INFO] Program Completed, total ticks: 639

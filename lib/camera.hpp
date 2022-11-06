@@ -8,11 +8,15 @@ struct Camera {
     Camera();
     void setPosition(float x, float y, float z);
     void setRotation(float x, float y, float z);
+    void rotate(float x, float y, float z);
     void setProjection(float fov, float aspect, float near, float far);
     void setPerspective(float fov, float aspect, float near, float far);
     void setOrthographic(float left, float right, float bottom, float top);
     void setViewport(float x, float y, float width, float height);
+    void scale(float scale);
     mat4 getViewMatrix();
+    mat4 getProjMatrix();
+    mat4 getDefaultProj();
 	vec3 position = vec3(0.0f, 0.0f, 0.0f);
     vec3 rotation = vec3(0.0f, 0.0f, 0.0f);
     vec4 projection = vec4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -21,7 +25,7 @@ struct Camera {
 	float aspect;
 	float near;
 	float far;
-    float * getProj_matrix();
+    float s = 1.0f;
 };
 
 #endif

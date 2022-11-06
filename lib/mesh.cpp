@@ -14,15 +14,19 @@
 #include <sstream>
 #include <string>
 #include <vector>
+
+#define VERBOSE 0
+
 int MESH_SIZE = 0;
 std::vector<float> points;
 std::vector<int> faces;
+std::vector<float> colors;
 
 void con_faces();
 inline void con_faces(){
-    println(WHITE, "Faces: %i, Vertices: %i", faces.size(), points.size());
+    if(VERBOSE)println(WHITE, "Faces: %i, Vertices: %i", faces.size(), points.size());
     for(int a = 0; a < faces.size()/3; a++){
-        println(GREEN ,"Face(%i): %i-%i-%i -> %i,%i,%i ==> (%f,%f,%f), (%f,%f,%f), (%f,%f,%f)",
+        if(VERBOSE)println(GREEN ,"Face(%i): %i-%i-%i --> %i,%i,%i \n(%f,%f,%f),\n(%f,%f,%f),\n(%f,%f,%f)",
         a, 
         faces[a*3], faces[a*3+1], faces[a*3+2], 
         faces[a*3]-1, faces[a*3+1]-1, faces[a*3+2]-1,
@@ -45,7 +49,6 @@ inline void con_faces(){
     points = vertices;
     MESH_SIZE = vertices.size();
 }
-
 void loadMesh(const char* file);
 inline void loadMesh(const char* file){
     FILE* fp = fopen(file, "r");
@@ -56,8 +59,8 @@ inline void loadMesh(const char* file){
     char* line = NULL;
     size_t len = 0;
     while ((getline(&line, &len, fp)) != -1) {
-        // using printf() in all tests for consistency
-        //printf("%s", line);
+        // using if(VERBOSE)printf() in all tests for consistency
+        //if(VERBOSE)printf("%s", line);
         /*
         if(strncmp(line, "v", 0) == 0){
             std::vector<float> pnts = parse_float(line);
@@ -70,7 +73,7 @@ inline void loadMesh(const char* file){
         if(check[0] == 'v' && check[1] == ' '){
             //std::cout << line << "\n";
             std::vector<float> pnts = parse_float(line);
-            println(GREEN, "V(%i): %f, %f, %f", pnts.size(), pnts[0], pnts[1], pnts[2]);
+            if(VERBOSE)println(GREEN, "V(%i): %f, %f, %f", pnts.size(), pnts[0], pnts[1], pnts[2]);
             points.push_back(pnts[0]);
             points.push_back(pnts[1]);
             points.push_back(pnts[2]);
@@ -90,6 +93,21 @@ inline void loadMesh(const char* file){
     fclose(fp);
     if (line)
         free(line);
+}
+void genMatCap();
+inline void genMatCap(){
+    for(int i = 0; i < MESH_SIZE/9; i++){
+        colors.push_back(1.0f);colors.push_back(0.0f);colors.push_back(0.0f);
+        colors.push_back(0.0f);colors.push_back(1.0f);colors.push_back(0.0f);
+        colors.push_back(0.0f);colors.push_back(0.0f);colors.push_back(1.0f);
+    }
+}
+void pushColors(float * color_m){
+    log(LOG_INFO, "Pushing colors(%i) for faces(%i)", colors.size()/3, MESH_SIZE/3);
+    for(int i = 0; i < points.size(); i++){
+        *color_m = (GLfloat)points[i];
+        color_m++;
+    }
 }
 void pushMesh(float * mesh);
 inline void pushMesh(float * mesh){

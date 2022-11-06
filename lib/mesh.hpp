@@ -21,7 +21,6 @@ inline std::vector<std::string> split (const std::string &s, char delim) {
     }
     return result;
 }
-
 std::vector<float> parse_float(const char *line);
 inline std::vector<float> parse_float(const char *line){
     std::vector<float> floats;

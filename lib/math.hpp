@@ -14,6 +14,8 @@ struct vec4;
 
 struct mat4;
 
+struct quat;
+
 struct vec2 {
     vec2();
     vec2(float x, float y);
@@ -25,6 +27,7 @@ struct vec2 {
 struct vec3 {
     vec3();
     vec3(float x, float y, float z);
+    vec3 inverse();
     float t_arr();
     float x;
     float y;
@@ -45,6 +48,16 @@ struct mat4 {
     mat4();
     mat4(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33);
     float m[16];
+    mat4 operator*( const mat4& rhs );
+};
+
+struct quat {
+    quat();
+    quat(float x, float y, float z, float w);
+    float x;
+    float y;
+    float z;
+    float w;
 };
 
 struct vec2 operator+(vec2 a, vec2 b);

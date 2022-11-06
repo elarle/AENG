@@ -1,0 +1,7 @@
+#ifndef AENG_SHADER_H
+#define AENG_SHADER_H
+
+#define MAX_SHADER_SIZE 2048
+#define MAX_SHADER_LOG_SIZE 512
+
+#endif
