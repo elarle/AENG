@@ -2,8 +2,8 @@
 #define AENG_SHADER
 
 #include "shader.hpp"
-#include "reader.h"
-#include "util.h"
+#include "../utils/reader.h"
+#include "../utils/logger.h"
 #include <GL/eglew.h>
 #include <GL/gl.h>
 
@@ -11,7 +11,7 @@ GLuint createVS();
 inline GLuint createVS(){
     const char* p;
     char VS[MAX_SHADER_SIZE];
-    readfile("./shaders/VS.glsl", VS);
+    readfile("./shaders/VS2.glsl", VS);
     GLuint vs = glCreateShader(GL_VERTEX_SHADER);
     p = (const GLchar*)VS;
     glShaderSource(vs, 1, &p, NULL);
@@ -22,7 +22,7 @@ GLuint createFS();
 inline GLuint createFS(){
     const char* p;
     char FS[MAX_SHADER_SIZE];
-    readfile("./shaders/FS.glsl", FS);
+    readfile("./shaders/FS2.glsl", FS);
     GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
     p = (const GLchar*)FS;
     glShaderSource(fs, 1, &p, NULL);
@@ -69,15 +69,22 @@ void point_vbo(GLuint*PVBO, int size, float* mesh);
 inline void point_vbo(GLuint *PVBO, int size, float* mesh){
     glGenBuffers(1, PVBO);
     glBindBuffer(GL_ARRAY_BUFFER , *PVBO);
-    glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), mesh, GL_STATIC_DRAW);    
+    glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), mesh, GL_STATIC_DRAW);
     log(LOG_INFO, "Created Point vertex buffer object");
+}
+void maps_vbo(GLuint*MVBO, int size, float* maps);
+inline void maps_vbo(GLuint*MVBO, int size, float*maps){
+    glGenBuffers(1, MVBO);
+    glBindBuffer(GL_ARRAY_BUFFER , *MVBO);
+    glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), maps, GL_STATIC_DRAW);
+    log(LOG_INFO, "Created map vertex buffer object");
 }
 void color_vb0(GLuint*PVBO, int size, float* mesh);
 inline void color_vbo(GLuint*CVBO, int size, float* colors){
     glGenBuffers(1, CVBO);
     glBindBuffer(GL_ARRAY_BUFFER , *CVBO);
-    glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), colors, GL_STATIC_DRAW);    
     log(LOG_INFO, "Created Color vertex buffer object");
 }
+
 
 #endif

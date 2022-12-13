@@ -9,7 +9,9 @@
 #include <string.h>
 #include <string>
 #include <vector>
-#include "console.hpp"
+#include "camera.hpp"
+#include "../utils/console.hpp"
+#include "../logic/math.hpp"
 
 inline std::vector<std::string> split (const std::string &s, char delim) {
     std::vector<std::string> result;
@@ -53,5 +55,25 @@ inline std::vector<int> parse_faces(const char *line){
         }
     return floats;
 }
+
+struct Mesh{
+    Mesh();
+    Mesh(const char *filename, int coloured);
+    int size = 0;
+    std::vector<float> vertices;
+    std::vector<float> colors;
+    void push_mesh(float * array);
+    void push_colors(float * array);
+    void push_maps(float * array);
+    void apply(mat4*matrix, Camera cam);
+    void move(vec3 movement);
+    void rotate(vec3 rotation);
+    void scalate(vec3 scale);
+    void setPosition(vec3 pos);
+    vec3 position = vec3(0.0f, 0.0f, 0.0f);
+    vec3 rotation = vec3(0.0f,0.0f,0.0f);
+    vec3 scale = vec3(1, 1, 1);
+    mat4 getMatrix();
+};
 
 #endif

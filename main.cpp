@@ -1,19 +1,22 @@
-#include "lib/camera.cpp"
-#include "lib/console.hpp"
-#include "lib/math.hpp"
-#include "lib/mesh.hpp"
-#include "lib/util.h"
-#include "lib/math.cpp"
-#include "lib/window.h"
-#include "lib/reader.h"
-#include "lib/mesh.cpp"
-#include "lib/shader.cpp"
+#include "lib/globals.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "lib/engine/camera.cpp"
+#include "lib/utils/console.hpp"
+#include "lib/logic/math.cpp"
+#include "lib/utils/logger.h"
+#include "lib/utils/utils.cpp"
+#include "lib/engine/texture.cpp"
+#include "lib/engine/mesh.cpp"
+#include "lib/core/window.h"
+#include "lib/utils/reader.h"
+#include "lib/engine/shader.cpp"
 #include <GL/gl.h>
-#include <GL/glu.h>
 #include <GLFW/glfw3.h>
-#include <cmath>
 #include <sys/time.h>
+#include <sys/types.h>
+#include <vector>
 
+/*
     //---------FORMATTING---------//
 
     //int -> %d / %i
@@ -28,7 +31,6 @@
 
     //---------POINTERS-----------//
 
-    /***
         int direccion = &variable;
         int * puntero = &variable;
 
@@ -40,11 +42,9 @@
         edit value -> *pnt = val;
 
         *pnt = 20 === var = 20;
-    ***/
 
     //----------ARRAYS---------//
 
-    /***
         int values[5];
 
         int * pnt;
@@ -63,13 +63,15 @@
 
         *(p+2) = 30; => p == 0 -> +2 = val[2]; 
 
-
-    ***/
+*/
 
 int asd = 0;
 void update(){
     asd++;
 }
+
+//-----MAIN----//
+
 int main(){
 
     log_start();
@@ -77,104 +79,91 @@ int main(){
     int width = 480;
     int height = 720;
 
+    int left_click = 0;
+    int right_clicl = 0;
+
+    vec2 mouse = vec2(0,0);
+    vec2 mouse_l = mouse;
+
+    double scroll = 0;
+
     GLint colour_loc;
 
-    //----------MODEL LOADING----------//
+    //----------LOAD MODEL----------//
 
-    loadMesh("./models/sphere.obj");
-    GLfloat mesh[MESH_SIZE];
-    GLfloat colours[MESH_SIZE];
-    pushMesh(mesh);
-    genMatCap();
-    pushColors(colours);
-    
+    Mesh malla = Mesh("./models/box.obj", true);
 
-    log(LOG_INFO, "Model loaded, (%i) -> %i bytes", MESH_SIZE/3, MESH_SIZE * sizeof(float));
+    GLfloat mesh[malla.size], colours[malla.size], maps[malla.size];
+
+    malla.push_mesh(mesh);
+    malla.push_colors(colours);
+    malla.push_maps(maps);
+
     glfwSetErrorCallback(err_cb);
 
     //---------WINDOW INIT----------//    
 
-    if(!AENGCreateWindow(width, height, "CULOCAGAO")){
+    if(!AENGCreateWindow(&width, &height, "CULOCAGAO")){
         std::cout << "EXCEPTION OCURRED\n";
         log(LOG_INFO, "Error while creating frame");
         return -1;
     }
+
     log(LOG_INFO, "Window created succesfully");
 
     println(GREEN, "Created window W:%i, H: %i", width, height);
 
-    //------SHADER CREATION------//
+    //------TEXTURING------//
 
-    GLuint vs = createVS();
-    log(LOG_INFO, "Loaded Vertex Shader");
-    GLuint fs = createFS();
-    log(LOG_INFO, "Loaded Fragment Shader");
-
-    GLuint PVBO, CVBO;
-    point_vbo(&PVBO, MESH_SIZE, mesh);
-    color_vbo(&CVBO, MESH_SIZE, colours);
-
-    log(LOG_INFO, "Generated Vertex Buffers");
-
-    GLuint VAO;
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, PVBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, CVBO);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    glEnableVertexAttribArray(1);
-
-    log(LOG_INFO, "Generated VAO");
-
-    //------SHADER LINKING------//
-
-    GLuint shader = glCreateProgram();
-    glAttachShader(shader, fs);
-    glAttachShader(shader, vs);
-
-    glBindAttribLocation(shader, 0, "vertex_position");
-    glBindAttribLocation(shader, 1, "vertex_color");
-
-    glLinkProgram(shader);
-
-    shader_info_log(fs, 1);
-    shader_info_log(vs, 0);
-    shader_program_log(shader);
-
-    if(!is_valid(shader)){
-        log(LOG_INFO, "Shader linked");
+    GLuint tex;
+    Texture textura_1 = Texture(&tex);
+    textura_1.setFile("./textures/01.png");
+    int ts = textura_1.load();
+    if(ts){
+        log(LOG_ERROR, "Error loading texture %he", ts);
     }
 
-    //--------------------CAMARA---------------------//
+    //------CREATE ALL SHADER PARAMETERS------//
+
+    GLuint shader, vs, fs, PVBO, MVBO, VAO;
+
+    point_vbo(&PVBO, MESH_SIZE, mesh);
+    maps_vbo(&MVBO, MESH_SIZE, maps);
+
+    create_shaders(&shader, &vs, &fs, &PVBO, &MVBO,&VAO);
+
+    //--------------------CAMARA PARAMETERS INIT---------------------//
 
     log(LOG_INFO, "Creating camera parameters");
 
     Camera cam = Camera();
 
-    cam.setPosition(10.0f, 0.0f, 0.5f);
-    cam.setRotation(0.0f, 180.0f, 0.0f);
-    cam.scale(0.8f);
-    cam.setProjection(150.0f*RAD, 16.0f/9.0f, 0.1f, 100.0f);
+    AENGMousePointers(&mouse, &left_click, &right_clicl, &cam);
 
-    mat4 proj = cam.getDefaultProj();
-    mat4 view = cam.getViewMatrix();
+    cam.setPosition(0.0f, 10.0f, -10.0f);
+    cam.setRotation(0.0f, 0.0f, 0.0f);
+    cam.scale(0.1f);
+    cam.setProjection(67.0f, (float)width/(float)height, 1.0f, 1000.0f);
 
-    GLint model_mat_location = glGetUniformLocation( shader, "model" );
-    GLint view_mat_location = glGetUniformLocation( shader, "view" );
-    GLint proj_mat_location = glGetUniformLocation( shader, "proj" );
+    malla.setPosition(vec3(0.0f, 0.0f, 5.0f));
 
-    glUseProgram(shader);
-    glUniformMatrix4fv( view_mat_location, 1, GL_FALSE, view.m );
-    glUniformMatrix4fv( proj_mat_location, 1, GL_FALSE, proj.m );
+    mat4 model = malla.getMatrix();
+    mat4 view = cam.getViewMatrixV2();
+    mat4 proj = cam.getProjMatrix();
 
-    mat4 model_mat[1];
-    model_mat[0] = translate( identity_mat4(), vec3(0.0f, 0.0f, 0.0f));
+    proj.m[11] = -1.0f;
 
-    println(YELLOW, "CAM ROT = %f", cam.rotation.x);
+    log(LOG_INFO, "Created camera parameters");
+
+    //----------------MATRIX LOCATIONS-------------------//
+
+    GLint mml, vml, pml;
+    allocate(&shader,&mml, &vml, &pml);
+
+    glUniformMatrix4fv( vml, 1, GL_FALSE, proj.m );
+    glUniformMatrix4fv( pml, 1, GL_FALSE, view.m );
+
+    log(LOG_INFO, "Apliying mesh transforms");
 
     //------------------SETTINGS---------------------//
 
@@ -194,6 +183,8 @@ int main(){
     long int CT = 0;
     long int LT = 0;
 
+    float sens = 20.0f;
+
     int DC = 0;
     long int TIMER = 0;
 
@@ -204,6 +195,8 @@ int main(){
 
     //----------------MAIN LOOP-----------------//
 
+    float fou = 60.0f;
+
     while(!AENGClose()) {
 
         //----CLOCK STUFF-----//
@@ -212,14 +205,44 @@ int main(){
         CT = tp.tv_sec*1000+tp.tv_usec/1000;
         DELTA += (CT-LT)/DI;
         TIMER += (CT-LT);
+
         LT = CT;
 
         //-----TICK-----//
 
         if(DELTA >= 1){
-            cam.rotate(0.5f, 0.5f, 0.5f);
-            glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, cam.getViewMatrix().m);
-            AENGUpdate(update, &shader, MESH_SIZE, model_mat_location, model_mat[0]);
+
+            cls();
+            cam.position.print(RED);
+            cam.rotation_r.print(GREEN);
+            vec3 dir = vec3(
+                sinf(cam.rotation.x)*cosf(cam.rotation.y),
+                sinf(cam.rotation.x)*sinf(cam.rotation.y),
+                cosf(cam.rotation.x)
+            );
+            dir.print(BLUE);
+            malla.position.print(MAGENTA);
+            
+            //---MOUSE---//
+
+            if(mouse != mouse_l){
+                cam.rotate((mouse.y-mouse_l.y)/sens, (mouse.x-mouse_l.x)/sens, 0.0f);
+            }
+            mouse_l.x = mouse.x;
+            mouse_l.y = mouse.y;
+
+            //---MATRIX UPDATING---//
+
+            model = malla.getMatrix();
+            view = cam.getViewMatrixV3();
+
+            cam.projection.y = (float)width/(float)height;
+
+            proj = cam.getProjMatrix();
+
+            update_matrix(&proj, &view, &model);
+            AENGUpdate(update, &shader, MESH_SIZE);
+
             DELTA--;
             DC++;
         }
@@ -232,6 +255,58 @@ int main(){
             glfwSetWindowTitle(window, ss.str().c_str());
             TIMER = 0;
             DC = 0;
+        }
+
+        //----KEY CHECKING----//
+
+        if(glfwGetKey(window, GLFW_KEY_ESCAPE) == 1)
+        {
+            glfwSetWindowShouldClose(window, true);
+        }
+
+        //----MOVEMENT----//
+
+        float sp = 0.1f;
+        
+        if(glfwGetKey(window, GLFW_KEY_W) == 1){
+            cam.moveV2(1, sp);
+        }
+        if(glfwGetKey(window, GLFW_KEY_S) == 1){
+            cam.moveV2(2, sp);
+        }
+        if(glfwGetKey(window, GLFW_KEY_A) == 1){
+            cam.moveV2(3, sp);
+        }
+        if(glfwGetKey(window, GLFW_KEY_D) == 1){
+            cam.moveV2(4, sp);
+        }
+
+        //--------MANUAL ROTATION--------//
+
+        if(glfwGetKey(window, GLFW_KEY_RIGHT) == 1){
+            cam.setRotation(0, 90, 0);
+        }
+        if(glfwGetKey(window, GLFW_KEY_LEFT) == 1){
+            cam.setRotation(0, -90, 0);
+        }
+        if(glfwGetKey(window, GLFW_KEY_UP) == 1){
+            cam.setRotation(90, 0, 0);
+        }
+        if(glfwGetKey(window, GLFW_KEY_DOWN) == 1){
+            cam.setRotation(-90, 0, 0);
+        }
+
+        //--------FOV--------//
+        
+        cam.projection.x += scroll/10.0f;
+
+        //------RESTART POS-----//
+
+        if(glfwGetKey(window, GLFW_KEY_R) == 1){
+            cam.projection.x = 67.0f;
+            malla.position = vec3(0.0f, 0.0f, 0.0f);
+            malla.rotation = vec3(0.0f, 0.0f, 0.0f);
+            malla.scale = vec3(1.0f, 1.0f, 1.0f);
         }
     }
 
