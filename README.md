@@ -5,14 +5,16 @@ This project started as a way to learn C++, now I'm working on the implementatio
 
 All contributions to the project are wellcome!
 
+<h4>[----------( Implementations )-----------]</h4>
 
-✓ Feautres:
--Import .obj files.
--Camera.
-
-✖ Future Feautres:
--Textures.
--Custom shaders.
--Multiple objects render.
--Phisics.
+<h3>✔ Feautres:</h3><br>
+-Import .obj files.<br>
+-Camera.<br>
+-Direction based movement.<br>
+<br>
+<h3>✘ Future Feautres:</h3>
+-Textures.<br>
+-Custom shaders.<br>
+-Multiple objects render.<br>
+-Phisics.<br>
 
