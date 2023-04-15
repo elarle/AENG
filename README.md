@@ -11,10 +11,10 @@ All contributions to the project are wellcome!
 -Import .obj files.<br>
 -Camera.<br>
 -Direction based movement.<br>
+-Multiple objects render.<br>
+-Textures(partially).<br>
+-Custom shaders(partially).<br>
 <br>
 <h3>✘ Future Feautres:</h3>
--Textures.<br>
--Custom shaders.<br>
--Multiple objects render.<br>
 -Phisics.<br>
 
