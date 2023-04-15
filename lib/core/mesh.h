@@ -83,8 +83,6 @@ inline void mesh::connect_faces (){
         heap_vertices[e+1] = vertices[(faces[i])*3+1];
         heap_vertices[e+2] = vertices[(faces[i])*3+2];
         
-        e+=3;
-
         /* normals.push_back(normal[(normal_con[i])*3]);
         normals.push_back(normal[(normal_con[i])*3+1]);
         normals.push_back(normal[(normal_con[i])*3+2]); */
