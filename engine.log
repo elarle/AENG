@@ -1,0 +1,13 @@
+Starting Engine. Local time Sat Apr 15 12:35:44 2023
+Build version: Apr 15 2023 12:34:31
+
+[INFO] Starting AENG
+[INFO] GL init
+[INFO] Antialias set to: 16
+[INFO] System Info: 
+  Renderer: NVIDIA GeForce RTX 2060 SUPER/PCIe/SSE2 
+  Version: 4.1.0 NVIDIA 530.41.03
+[INFO] Raw mouse motion supported
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
