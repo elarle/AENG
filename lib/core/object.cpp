@@ -56,6 +56,12 @@ void object::pre_draw(){
 }
 
 void object::update_matrix(){
+    matrix = matrix * vec4(
+        scale.x,
+        scale.y,
+        scale.z,
+        1.0f
+    );
     matrix = mat4(
         1.0f, 0.0f, 0.0f, 0.0f,
         0.0f, cos(rotation.x), sin(rotation.x), 0.0f,
@@ -78,11 +84,12 @@ void object::update_matrix(){
     );
     //TRANSLATE
     matrix = matrix * mat4(
-        1.0f, 0.0f, 0.0f, -position.x,
-        0.0f, 1.0f, 0.0f, -position.y,
-        0.0f, 0.0f, 1.0f, -position.z,
+        1.0f, 0.0f, 0.0f, position.x,
+        0.0f, 1.0f, 0.0f, position.y,
+        0.0f, 0.0f, 1.0f, position.z,
         0.0f, 0.0f, 0.0f, 1.0f
     );
+
 }
 
 void object::move(vec2 dir){

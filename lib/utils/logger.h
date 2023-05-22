@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <ctime>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 //#define bool int
@@ -43,6 +44,22 @@ inline char* log_type(int type){
     }
     return (char*)"[UNKNOWN] ";
 }
+inline void log_shader(const char * msg){
+    FILE* file = fopen(LOG_FILE, "a");
+    if(!file){return;}
+
+    std::stringstream ss;
+
+    ss << log_type(LOG_NOINDENT);
+    ss << "Shader error: \n\t";
+    ss << msg;
+    ss << "\n";
+
+    fclose(file);
+
+    return;
+
+}
 void log(int type, const char* msg, ...);
 inline void log(int type, const char* msg,...){
     va_list s_args;
@@ -50,11 +67,15 @@ inline void log(int type, const char* msg,...){
     if(!file){return;}
     va_start(s_args, msg);
     std::string append;
+
+    std::ostringstream ss;
+
+    /* ss << log_type(type) << std::format(msg, s_args) << '\n'; */
     
     append = log_type(type);
     append += msg;
-    append += '\n';
-    
+    append += '\n'; 
+
     vfprintf(file, append.c_str(), s_args);
     va_end(s_args);
     fclose(file);

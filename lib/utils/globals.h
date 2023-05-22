@@ -10,7 +10,7 @@
 #define VERTEX_SHADER "./shaders/VSN.glsl"
 #define FRAGMENT_SHADER "./shaders/FSN.glsl"
 
-#define MAX_SHADER_LOG_SIZE 2048*8
+#define MAX_SHADER_LOG_SIZE 2048
 
 #define LOG_INFO 1
 #define LOG_WARNING 2

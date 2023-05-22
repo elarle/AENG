@@ -40,6 +40,14 @@
 
 #define mv(X, Y) printf("\033[%d;%dH", Y, X)
 
+inline void thide_cursor(){
+	printf("\e[?25l");
+}
+
+inline void tshow_cursor(){
+	printf("\e[?25h");
+}
+
 void Dimensions(int *cols, int *rows);
 
 inline void Dimensions(int *cols, int *rows){

@@ -115,7 +115,6 @@ inline int CreateWindow(int * width, int * height, const char * title){
     glfwSwapInterval(VSync);
 
     //glPolygonMode( GL_FRONT_AND_BACK, GL_POINT );
-    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
     glewExperimental = GL_TRUE;
     glewInit();

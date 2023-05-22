@@ -12,6 +12,8 @@
 #include <cstring>
 #include <vector>
 
+#include <time.h>
+
 #define FILE_NOT_FOUND 1;
 
 struct mesh{
@@ -103,15 +105,35 @@ inline void mesh::connect_faces (){
 }
 
 inline int mesh::load_file(const char *file_name){
+
     FILE* fp = fopen(file_name, "r");
     if(fp == NULL){return FILE_NOT_FOUND;}
     char* line = NULL;
     size_t len = 0;
+
+    int i = 0;
+    int e = 0;
+
+    thide_cursor();
+
+    time_t seconds;
+    seconds = time (NULL);
+    long int last = seconds;
+
+    mv(0, 0);
+    println("Loading -> %s", file_name);
+
     while((getline(&line, &len, fp)) != -1){
+
+        seconds = time (NULL);
+
         char check[sizeof(line)];
         strncpy(check, line, sizeof(check));
+    
+        mv(2, 3);
+        print(GREEN, " * line -> %i", i);
 
-            //VERTEX
+        //VERTEX
         if(check[0] == 'v' && check[1] == ' '){
             std::vector<float> pnts = parse_float(line);
             vertices.push_back(pnts[0]);
@@ -120,20 +142,19 @@ inline int mesh::load_file(const char *file_name){
             VERTICES+=3;
         }
 
+        //NORMALS
         if(check[0] == 'v' && check[1] == 'n'){
             std::vector<float> pnts = parse_float(line);
             normal.push_back(pnts[0]);
             normal.push_back(pnts[1]);
             normal.push_back(pnts[2]);
-            VERTICES+=3;
         }
 
-            //MAPS
+        //UVS
         if(check[0] == 'v' && check[1] == 't'){
             std::vector<float> norm = parse_float(line);
             uv.push_back(norm[0]);
             uv.push_back(norm[1]);
-            //UVS+=2;
         }
 
         //CONNECTIONS
@@ -151,9 +172,29 @@ inline int mesh::load_file(const char *file_name){
             normal_con.push_back(data[9]-1);
             FACES++;
         }
+
+        i++;
+
+        if(seconds > last){
+            e++;
+            mv(2, 4);
+            print(RED, " * speed ->  %f lines/s", (float)i/e);
+        }
+
+        last = seconds;
     }
 
+    tshow_cursor();
+
+    mv(0, 8);
+
     connect_faces();
+
+    println("");
+
+    println("");
+
+    println("");
 
     fclose(fp);
     if(line)free(line);

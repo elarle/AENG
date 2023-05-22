@@ -14,7 +14,7 @@ inline void shader_info(GLuint shader){
     char info_log[MAX_SHADER_LOG_SIZE];
     glGetShaderInfoLog(shader, MAX_SHADER_LOG_SIZE, &al, info_log);
     if(al > 0){
-        log(LOG_WARNING, "Vertex Shader Log:\n\t%s", info_log);
+        log(LOG_WARNING, "Shader Log:\n\t%s", info_log);
     }
 }
 
@@ -24,11 +24,22 @@ int is_valid(GLuint sp){
     glGetProgramiv(sp, GL_VALIDATE_STATUS, &params);
     if(params != GL_TRUE){
         shader_info(sp);
-        log(LOG_WARNING, "ERROR COMPILING SHADER: %i", params);
+        log(LOG_WARNING, "ERROR COMPILING SHADER: %s", params);
         return 0;
     }
     return 1;
 };
+
+inline void shader_program_log(GLuint shader_program){
+    int al = 0;
+    char info_log[MAX_SHADER_LOG_SIZE];
+    glGetProgramInfoLog(shader_program, MAX_SHADER_LOG_SIZE, &al, info_log);
+    if(true || al > 0){
+        std::string a = info_log;
+        printf("%s", a.c_str());
+        log_shader(info_log);
+    }
+}
 
 inline void load_s(GLuint *so, const char * file){
     const char*p;
@@ -82,6 +93,9 @@ int shader::load(const char * vs, const char * fs){
     glLinkProgram(program);
 
     if(!is_valid(program)){
+        shader_program_log(program);
+        shader_program_log(vertex);
+        shader_program_log(fragment);
         log(LOG_ERROR, "Shader creation failed");
         return 1;
     }

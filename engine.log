@@ -1,5 +1,5 @@
-Starting Engine. Local time Sat Apr 15 12:35:44 2023
-Build version: Apr 15 2023 12:34:31
+Starting Engine. Local time Mon May 22 15:52:15 2023
+Build version: May 22 2023 15:52:12
 
 [INFO] Starting AENG
 [INFO] GL init
@@ -11,3 +11,287 @@ Build version: Apr 15 2023 12:34:31
 [INFO] Loading shader (./shaders/VSN.glsl)
 [INFO] Loading shader (./shaders/FSN.glsl)
 [INFO] Loaded shaders
+[INFO] Starting main thread
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Loading shader (./shaders/VSN.glsl)
+[INFO] Loading shader (./shaders/FSN.glsl)
+[INFO] Loaded shaders
+[INFO] Program ended

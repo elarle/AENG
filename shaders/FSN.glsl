@@ -2,29 +2,31 @@
 
 out vec4 frag_color;
 
-in vec3 vpos;
 in vec3 fpos;
+in vec3 vpos;
 in vec2 vmap;
 
 in vec3 normal;
-
 in vec3 view_pos;
 
 uniform sampler2D texture_s;
+
+uniform vec3 light_pos;
+uniform vec3 light_color;
 
 void main(){
 
   // AMBIENT LIGHTING (Global)
 
-  vec3 light_color = vec3(0.2, 0.2, 0.8);
-
-  float ambientStrength = 0.9;
-  vec3 ambient = ambientStrength * vec3(0.6, 0.6, 0.6);
+  float ambientStrength = 0.0;
+  vec3 ambient = ambientStrength * vec3(0.5, 0.5, 0.5);
   
   // BASIC LIGHTNING (Lights calculation)
 
+
+
   vec3 norm = normalize(normal);
-  vec3 ldir = normalize(vec3(0, 3, -1) - fpos);
+  vec3 ldir = normalize(light_pos - fpos);
 
   float diff = max(dot(norm, ldir), 0.0);
 
@@ -39,7 +41,7 @@ void main(){
   vec3 reflec_dir = reflect(-ldir, norm);
 
   //--------------------------------------------------Radius
-  float spec = pow(max(dot(view_dir, reflec_dir), 0.0), 64);
+  float spec = pow(max(dot(view_dir, reflec_dir), 0.0), 12);
 
   vec3 specular = s_strength * spec * light_color;
 
