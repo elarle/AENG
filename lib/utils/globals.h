@@ -20,7 +20,9 @@
 #define MAX_FPS 144.0
 #define TPS_BASE 128.0
 
-#define CAM_DEBUG 1
+#define CAM_DEBUG 0
+#define OGL_DEBUG 0
+#define DEBUG 1
 
 #define VSync 0
 

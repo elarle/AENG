@@ -1,3 +1,6 @@
-scene/models/land2.obj
+scene/models/*
 .temp
 .vscode
+quad.cpp
+quat
+cmp.sh

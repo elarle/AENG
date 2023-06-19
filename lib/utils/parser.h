@@ -1,6 +1,7 @@
 #ifndef AENG_PARSER
 #define AENG_PARSER
 
+#include "console.h"
 #include <string.h>
 #include <sstream>
 #include <string>
@@ -37,7 +38,7 @@ inline vector<int> parse_faces(const char * line){
     string s = line;
     int len = strlen(line);
     vector<string> v = split(s, ' ');
-    for(int i = i; i < (int)v.size(); i++){
+    for(int i = 0; i < v.size(); i++){
         vector<string> vcs = split(v[i], '/');
         for(int e = 0; e < vcs.size(); e++){
             const char * line_v = vcs[e].c_str();

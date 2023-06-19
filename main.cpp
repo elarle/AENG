@@ -6,6 +6,7 @@
 #include "lib/core/shader.h"
 #include "lib/engine/math.h"
 #include "lib/engine/window.h"
+#include "lib/scene/scene.h"
 #include "lib/utils/globals.h"
 #include "lib/utils/logger.h"
 #include "lib/utils/console.h"
@@ -51,20 +52,12 @@ void draw(){
 
     for(int e = 0; e < lights.size(); e++){
 
-        //lights[e].color.print();
-        /* println("---");
-
-        cam.position.print();
-        lights[e].pos.print(); */
-
-        glUniform3f(light_pos, lights[0].pos.x, lights[0].pos.y, lights[0].pos.z);
-        glUniform3f(light_col, lights[0].color.x, lights[0].color.y, lights[0].color.z);
-
+        glUniform3f(light_pos, lights[e].pos.x, lights[e].pos.y, lights[e].pos.z);
+        glUniform3f(light_col, lights[e].color.x, lights[e].color.y, lights[e].color.z);
         glUniform3f(cam_pos, cam.position.x, cam.position.y, cam.position.z);
 
         for(int i = 0; i < objs.size(); i++){
 
-            //println(BLUE, "%i", 0);
             
             glBindVertexArray(objs[i].VA);
             //objs[i].matrix.print();
@@ -73,6 +66,7 @@ void draw(){
 
             glUniform1i(texture_s, 0);
 
+
             objs[i].pre_draw();
 
             //println(GREEN, "%i", objs[i].malla.SIZE/3); 
@@ -80,13 +74,15 @@ void draw(){
             //glDisableVertexAttribArray(objs[i].VA);
             //println(BLUE, "DRAWING %i", objs[i].malla.SIZE);
 
+            
+
         }
 
-        glfwSwapBuffers(window);
+        
         
     }
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
+    glfwSwapBuffers(window);
     glfwPollEvents();
 }
 
@@ -100,8 +96,10 @@ int main(){
     if(CreateWindow(&width, &height, "Mi moto alpino derrapante")){}
     addHandlers(&mouse_xy, &click_k, &scroll_d, &cursor_visibility);
 
-    glEnable(GL_DEBUG_OUTPUT);
-    glDebugMessageCallback(debugCallback, nullptr);
+    if(OGL_DEBUG){
+        glEnable(GL_DEBUG_OUTPUT);
+        glDebugMessageCallback(debugCallback, nullptr);
+    }
 
     P_shader = shader();
     P_shader.load(VERTEX_SHADER, FRAGMENT_SHADER);
@@ -112,40 +110,27 @@ int main(){
     light_pos = glGetUniformLocation(P_shader.program, "light_pos");
     light_col = glGetUniformLocation(P_shader.program, "light_color");
 
+    Scene scena = Scene("./scene/scene.dat");
+    scena.load();
+
     object cube = object();
-    cube.load_file("./scene/models/land_low.obj");
-
+    cube.load_file("./scene/compiled/lady.dat");
     cube.scale = vec3(10, 10, 10);
-
     cube.update_matrix();
-    
     cube.load();
-
-    cube.texture = material("./scene/textures/tex.png");
+    cube.texture = material("./scene/textures/uvgrid.png");
 
     object cube2 = object();
-    cube2.load_file("./scene/models/sphere.obj");
-
-    cube2.position = vec3(0, 2, 0);
-    
+    cube2.load_file("./scene/compiled/sphere.dat");
+    cube2.scale = vec3(10, 10, 10);
     cube2.update_matrix();
     cube2.load();
+    cube2.texture = material("./scene/textures/uvgrid.png");
 
-    cube2.texture = material("./scene/textures/tex2.png");
-
-/*     object cube2 = object();
-    cube2.load_file("./scene/models/cylinder.obj");
-    cube2.texture = material("./scene/textures/pene.png");
-
-    cube2.position = vec3(-2, 0, 0);
-
-    cube2.load();
- */
-/*     object cube3 = object();
-    cube3.load_file("./scene/models/land2.obj");
-    cube3.texture = material("./scene/textures/tex2.png");
-
-    cube3.load(); */
+    object floor = object();
+    floor.load_file("./scene/compiled/floor.dat");
+    floor.load();
+    floor.texture = material("./scene/textures/uvgrid.png");
 
     glEnableVertexAttribArray(0);
 
@@ -153,37 +138,22 @@ int main(){
 
     objs.push_back(cube);
     objs.push_back(cube2);
+    objs.push_back(floor);
 
     light light1 = light();
     light1.color = vec4(1.0, 1.0, 0.0, 1.0);
     light1.pos = vec3(0.0, 2.0, 0.0);
+    light light2 = light();
+    light2.color = vec4(1.0, 1.0, 0.0, 1.0);
+    light2.pos = vec3(1.0, -2.0, 0.0);
     lights.push_back(light1);
-    /* light light2 = light();
-    light2.color = vec4(0.0, 0.5, 1.0, 1.0);
-    light2.pos = vec3(-3.0, 4.0, -1.0);
-    lights.push_back(light2); */
-/*     objs.push_back(cube2); */
-/*     objs.push_back(cube3); */
-
-/*     objs.push_back(fem);
-    objs.push_back(tri);
-    objs.push_back(cube);
-    objs.push_back(cube);
-    objs.push_back(cube); */
+    lights.push_back(light2);
 
     for(int i = 0; i < objs.size(); i++){
         SIZE+=objs[i].malla.SIZE;
         objs[i].update_matrix();
     }
 
-    // ----- CREAR SHADER
-
-    /* glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, objs[1].VB);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL); */
-    
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
@@ -221,9 +191,7 @@ int main(){
     cam.rotate(vec3(0, 0, 0));
 
     cam.speed = 0.01f;
-
     cam.min = 0.7f;
-
     cam.max = 1000.0f;
 
     cam.recalc_view();
@@ -244,6 +212,43 @@ int main(){
 
     glShadeModel(GL_FLAT);
 
+    // SHADOWS!!
+
+    unsigned int depth_map_FBO;
+    glGenBuffers(1, &depth_map_FBO);
+
+    /* const unsigned int shadow_width = 1024, shadow_height = 1024;
+
+    unsigned int depth_map;
+    glGenTextures(1, &depth_map);
+    
+    glBindTexture(GL_TEXTURE_2D, depth_map);
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadow_width, shadow_height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, depth_map_FBO);
+
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth_map, 0);
+
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glViewport(0, 0, shadow_height, shadow_width);
+
+    //PASS LIGHT MATRIX
+    glUniform3f(cam_pos, lights[0].pos.x, lights[0].pos.y, lights[0].pos.z);
+
+    glClear(GL_DEPTH_BUFFER_BIT);
+    draw();
+    glBindFramebuffer(GL_FRAMEBUFFER, depth_map_FBO); */
+
     while (!WINDOW_SHOULD_CLOSE()) {
 
         gettimeofday(&tp, NULL);
@@ -262,42 +267,31 @@ int main(){
         //lights[1].pos.y = sinf(TIMER)*4;
 
         if(!cursor_visibility){
-            /* if(mouse_xy != last_mouse){
-                cam.rotate(vec3((mouse_xy.y-last_mouse.y)/sens, (mouse_xy.x-last_mouse.x)/sens, 0.0f));
-                last_mouse.x = mouse_xy.x;
-                last_mouse.y = mouse_xy.y;
-            }  */
-
-            //mouse_xy.print();
-            //last_mouse.print();
-            //println("------");
             
             if(mouse_xy != last_mouse){
                 cam.rotation.y += (mouse_xy.x-last_mouse.x)*sens*RAD;
                 cam.rotation.x += (mouse_xy.y-last_mouse.y)*sens*RAD;
 
                 cam.rotation.RAD_FIX();
-                /* cam.rotate(vec3((mouse_xy.y-last_mouse.y)/sens, (mouse_xy.x-last_mouse.x)/sens, 0.0f)); */
                 last_mouse.x = mouse_xy.x;
                 last_mouse.y = mouse_xy.y;
-
-                //println("Sa actualizao -> %f, %f", cam.rotation.x, cam.rotation.y);
 
                 cam.recalc_view();
                 cam.recalc_proj();
             }
         }
 
+
+
         //FRAME 
 
         if(F_DELTA >= 1 || F_DELTA < 0){
 
-            lights[0].pos.print();
-
+            //lights[0].color.print();
             cam.recalc_view();
 
             glUniformMatrix4fv(view_p, 1, GL_FALSE, cam.view.m);
-            glUniformMatrix4fv(proj_p, 1, GL_FALSE, cam.proj.m);  
+            glUniformMatrix4fv(proj_p, 1, GL_FALSE, cam.proj.m);
 
             draw();
 
@@ -305,6 +299,7 @@ int main(){
             DC++;
         }
 
+                        
         //TICK
 
         if(T_DELTA >= 1 || T_DELTA < 0){
@@ -345,7 +340,7 @@ int main(){
                 glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN - cursor_visibility);
             }
 
-
+            
 
             //cam.position.z+=0.001;
 

@@ -18,8 +18,8 @@ void main(){
 
   // AMBIENT LIGHTING (Global)
 
-  float ambientStrength = 0.0;
-  vec3 ambient = ambientStrength * vec3(0.5, 0.5, 0.5);
+  float ambientStrength = 1;
+  vec3 ambient = ambientStrength * vec3(0.7, 0.6, 0.3);
   
   // BASIC LIGHTNING (Lights calculation)
 

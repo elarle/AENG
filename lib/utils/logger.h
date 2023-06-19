@@ -11,10 +11,29 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
+
+#include "console.h"
+#include <chrono>
 
 //#define bool int
 
 #define LOG_FILE "./engine.log"
+
+struct Crono{
+    typedef std::chrono::high_resolution_clock Time;
+    typedef std::chrono::milliseconds ms;
+    typedef std::chrono::duration<float> fsec;
+    std::chrono::system_clock::time_point start_time, end_time;
+    void start(){
+        start_time = Time::now();
+    }
+    double end(){
+        int val = (std::chrono::duration_cast<ms>((Time::now())-start_time)).count();
+        println(BLUE, "* Task commpleted in: %ims", val);
+        return val;
+    }
+};
 
 int log_start();
 inline int log_start(){
@@ -81,5 +100,7 @@ inline void log(int type, const char* msg,...){
     fclose(file);
     return;
 }
+
+
 
 #endif
